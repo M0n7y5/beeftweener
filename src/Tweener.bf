@@ -28,7 +28,7 @@ namespace BeefTweener
 		/// @param lerpFunc Function to use when Interpolating
 		[AllowAppend]
 		public this(T start, T end, double duration,
-			EaseFunc easeFunc, LerpFunc<T> lerpFunc = null)
+			EaseFunc easeFunc, bool startImmediately = true, LerpFunc<T> lerpFunc = null)
 		{
 			_elapsed = 0;
 			_start = start;
@@ -48,7 +48,7 @@ namespace BeefTweener
 				_lerpFunc = lerpFunc;
 
 			Value = _start;
-			Running = true;
+			Running = startImmediately;
 		}
 
 		/// @param start Value to start at
@@ -57,8 +57,9 @@ namespace BeefTweener
 		/// @param easeFunc Function to use when Easing
 		/// @param lerpFunc Function to use when Interpolating
 		[AllowAppend]
-		public this(T start, T end, float duration, EaseFunc easeFunc = null, LerpFunc<T> lerpFunc = null)
-			: this(start, end, (double)duration, easeFunc, lerpFunc)
+		public this(T start, T end, float duration, EaseFunc easeFunc = null,
+			bool startImmediately = true, LerpFunc<T> lerpFunc = null)
+			: this(start, end, (double)duration, easeFunc, startImmediately, lerpFunc)
 		{
 		}
 
@@ -68,8 +69,9 @@ namespace BeefTweener
 		/// @param easeFunc Function to use when Easing
 		/// @param lerpFunc Function to use when Interpolating
 		[AllowAppend]
-		public this(T start, T end, TimeSpan duration, EaseFunc easeFunc = null, LerpFunc<T> lerpFunc = null)
-			: this(start, end, duration.TotalSeconds, easeFunc, lerpFunc)
+		public this(T start, T end, TimeSpan duration, EaseFunc easeFunc = null,
+			bool startImmediately = true, LerpFunc<T> lerpFunc = null)
+			: this(start, end, duration.TotalSeconds, easeFunc, startImmediately, lerpFunc)
 		{
 		}
 
